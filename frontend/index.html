@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Don Bigote Suite</title>
+  <link rel="stylesheet" href="static/styles.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="static/icon.svg">
+  <meta name="theme-color" content="#9A5B28">
+  <link rel="stylesheet" href="static/vendor/dixel.css">
+  <script defer src="static/vendor/dixel.js"></script>
+</head>
+<body>
+  <main id="app" class="wrap"></main>
+  <script type="module">
+    window.__APP__ = {"name": "Don Bigote Suite", "entidad": "Cita", "plural": "Citas", "demo": {"usuario": "demo", "clave": "demo1234"}};
+    window.addEventListener('DOMContentLoaded', () => {
+      if (!window.Dixel) return;
+      Dixel.init({ smoothScroll: false, theme: { primary: "#9A5B28", mode: "dark" } });
+      let bandeja = null;
+      window.avisar = (texto, tipo) => {
+        if (!texto) return;
+        if (!bandeja) bandeja = Dixel.create('Toast', { position: 'bottom-right' }).mount(document.body);
+        bandeja.push({ type: tipo === 'error' ? 'danger' : (tipo || 'success'), message: String(texto) });
+      };
+    });
+    window.__CAMPOS__ = [{"nombre": "cliente", "etiqueta": "Cliente", "tipo": "relacion", "obligatorio": true, "opciones": [], "minimo": null, "maximo": null, "ayuda": "", "catalogo": "clientes"}, {"nombre": "sede", "etiqueta": "Sede", "tipo": "relacion", "obligatorio": true, "opciones": [], "minimo": null, "maximo": null, "ayuda": "", "catalogo": "sedes"}, {"nombre": "barbero", "etiqueta": "Barbero", "tipo": "relacion", "obligatorio": true, "opciones": [], "minimo": null, "maximo": null, "ayuda": "", "catalogo": "barberos"}, {"nombre": "servicio", "etiqueta": "Servicio", "tipo": "texto", "obligatorio": true, "opciones": [], "minimo": null, "maximo": null, "ayuda": "", "catalogo": ""}, {"nombre": "fecha", "etiqueta": "Fecha", "tipo": "fecha", "obligatorio": true, "opciones": [], "minimo": null, "maximo": null, "ayuda": "", "catalogo": ""}, {"nombre": "hora", "etiqueta": "Hora", "tipo": "opcion", "obligatorio": true, "opciones": ["09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00", "18:00"], "minimo": null, "maximo": null, "ayuda": "", "catalogo": ""}, {"nombre": "estado", "etiqueta": "Estado", "tipo": "opcion", "obligatorio": true, "opciones": ["pendiente", "confirmada", "atendida", "cancelada"], "minimo": null, "maximo": null, "ayuda": "", "catalogo": ""}, {"nombre": "monto", "etiqueta": "Monto cobrado (solo si fue atendida)", "tipo": "decimal", "obligatorio": true, "opciones": [], "minimo": 0.0, "maximo": null, "ayuda": "", "catalogo": ""}];
+    window.__CATALOGOS__ = [{"nombre": "Sede", "plural": "Sedes", "slug": "sedes", "visible": "nombre", "campos": [{"nombre": "nombre", "etiqueta": "Sede", "tipo": "texto", "obligatorio": true}, {"nombre": "direccion", "etiqueta": "Dirección", "tipo": "texto", "obligatorio": true}, {"nombre": "telefono", "etiqueta": "Teléfono", "tipo": "texto", "obligatorio": true}]}, {"nombre": "Cliente", "plural": "Clientes", "slug": "clientes", "visible": "nombre", "campos": [{"nombre": "nombre", "etiqueta": "Nombre", "tipo": "texto", "obligatorio": true}, {"nombre": "telefono", "etiqueta": "Teléfono", "tipo": "texto", "obligatorio": true}, {"nombre": "correo", "etiqueta": "Correo", "tipo": "texto", "obligatorio": true}, {"nombre": "puntos", "etiqueta": "Puntos de fidelidad", "tipo": "entero", "obligatorio": true}]}, {"nombre": "Barbero", "plural": "Barberos", "slug": "barberos", "visible": "nombre", "campos": [{"nombre": "nombre", "etiqueta": "Nombre", "tipo": "texto", "obligatorio": true}, {"nombre": "sede", "etiqueta": "Sede", "tipo": "texto", "obligatorio": true}, {"nombre": "comision", "etiqueta": "Comisión (%)", "tipo": "decimal", "obligatorio": true}]}];
+    // La aplicación es instalable (PWA): en el teléfono queda con su icono,
+    // como una app. La ruta es RELATIVA para funcionar también bajo /preview/.
+    if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+  </script>
+  <script type="module" src="static/js/app.js"></script>
+</body>
+</html>

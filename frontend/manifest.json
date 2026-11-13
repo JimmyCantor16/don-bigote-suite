@@ -1,0 +1,17 @@
+{
+  "name": "Don Bigote Suite",
+  "short_name": "Don Bigote S",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#2A1D16",
+  "theme_color": "#9A5B28",
+  "icons": [
+    {
+      "src": "static/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
